@@ -1,0 +1,20 @@
+class Enemy:
+    def __init__(self, name, health, attack, defense):
+        self.name = name
+        self.health = health
+        self.attack = attack
+        self.defense = defense
+
+    def take_damage(self, damage):
+        self.health -= damage
+
+    def attack_player(self, player):
+        damage_dealt = self.attack - player.defense
+        if damage_dealt > 0:
+            player.take_damage(damage_dealt)
+            print(f"{self.name} atacou {player.name} e causou {damage_dealt} de dano.")
+        else:
+            print(f"{self.name} atacou {player.name}, mas o ataque não causou dano.")
+
+    def is_alive(self):
+        return self.health > 0
