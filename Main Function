@@ -1,0 +1,17 @@
+def game():
+    player_name = input("Digite o nome do jogador: ")
+    player = Player(player_name, health=100, attack=20, defense=10)
+
+    enemy = Enemy("Inimigo", health=50, attack=10, defense=5)
+
+    while player.is_alive() and enemy.is_alive():
+        player.attack_enemy(enemy)
+        if enemy.is_alive():
+            enemy.attack_player(player)
+
+    if player.is_alive():
+        print("Parabéns! Você venceu o jogo!")
+    else:
+        print("GAME OVER")
+
+game()
