@@ -1,17 +1,28 @@
+# This function runs the game
 def game():
+
+    # Get the player's name and create a new Player object
     player_name = input("Digite o nome do jogador: ")
     player = Player(player_name, health=100, attack=20, defense=10)
 
+    # Create a new Enemy object
     enemy = Enemy("Inimigo", health=50, attack=10, defense=5)
 
+    # Continue the game loop while both the player and enemy are alive
     while player.is_alive() and enemy.is_alive():
+
+        # The player attacks the enemy
         player.attack_enemy(enemy)
+
+        # If the enemy is still alive, it attacks the player
         if enemy.is_alive():
             enemy.attack_player(player)
 
+    # Check if the player is still alive after the battle
     if player.is_alive():
         print("Parabéns! Você venceu o jogo!")
     else:
         print("GAME OVER")
 
+# Call the game function to start the game
 game()
