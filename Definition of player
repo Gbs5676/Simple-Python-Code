@@ -1,5 +1,5 @@
 class Player:
-    def __init__(self, name, health, attack, defense):
+    def __init__(self, name: str, health: int, attack: int, defense: int):
         """
         Initialize a new Player object with the given name, health, attack, and defense.
         :param name: The name of the player.
@@ -11,29 +11,31 @@ class Player:
         self.health = health
         self.attack = attack
         self.defense = defense
+        self._defense_bonus = 0
 
-    def take_damage(self, damage):
+    @property
+    def health(self):
+        """The current health of the player."""
+        return self._health
+
+    @health.setter
+    def health(self, value: int):
+        """Set the current health of the player, ensuring it remains non-negative."""
+        self._health = max(0, value)
+
+    def take_damage(self, damage: int):
         """
         Reduce the player's health by the given amount of damage.
         :param damage: The amount of damage to be taken.
         """
         self.health -= damage
 
-    def attack_enemy(self, enemy):
+    def attack_enemy(self, enemy: "Player"):
         """
-        Attack an enemy player, dealing damage equal to the attacking player's attack.
+        Attack an enemy player, dealing damage equal to the attacking player's attack plus any defense bonus.
         :param enemy: The enemy player to be attacked.
         """
-        damage_dealt = self.attack - enemy.defense
+        damage_dealt = self.attack + self._defense_bonus - enemy.defense
         if damage_dealt > 0:
             enemy.take_damage(damage_dealt)
-            print(f"{self.name} atacou {enemy.name} e causou {damage_dealt} de dano.")
-        else:
-            print(f"{self.name} atacou {enemy.name}, mas o ataque não causou dano.")
-
-    def is_alive(self):
-        """
-        Check if the player is still alive (i.e., has positive health).
-        :return: True if the player is alive, False otherwise.
-        """
-        return self.health > 0
+            print(f"{self.name} atacou {enemy.name} e causou {damage_
