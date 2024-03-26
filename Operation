@@ -1,1 +1,38 @@
-When you run the code, the game will start. The player and the enemy will attack each other until one of them is defeated. The player starts with 100 hit points, 20 attack points, and 10 defense points, while the enemy starts with 50 hit points, 10 attack points, and 5 defense points.
+# When the game starts, this code initializes the player and enemy objects,
+# setting their starting hit points, attack points, and defense points.
+# The player starts with 100 hit points, 20 attack points, and 10 defense points,
+# while the enemy starts with 50 hit points, 10 attack points, and 5 defense points.
+
+player = {
+    'hit_points': 100,
+    'attack_points': 20,
+    'defense_points': 10
+}
+
+enemy = {
+    'hit_points': 50,
+    'attack_points': 10,
+    'defense_points': 5
+}
+
+# The game loop continues until one of the two characters has 0 hit points.
+# On each iteration of the loop, the player and enemy attack each other.
+# The attacker's attack points are reduced by the defender's defense points,
+# and the defender's hit points are reduced by the attacker's attack points.
+
+while player['hit_points'] > 0 and enemy['hit_points'] > 0:
+    # Player attacks enemy
+    enemy['hit_points'] -= player['attack_points'] - enemy['defense_points']
+    
+    # Check if enemy is defeated
+    if enemy['hit_points'] <= 0:
+        print("The player has defeated the enemy!")
+        break
+    
+    # Enemy attacks player
+    player['hit_points'] -= enemy['attack_points'] - player['defense_points']
+    
+    # Check if player is defeated
+    if player['hit_points'] <= 0:
+        print("The enemy has defeated the player!")
+        break
