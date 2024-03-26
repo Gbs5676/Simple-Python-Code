@@ -1,13 +1,16 @@
 class Enemy:
+    # Initialize enemy with name, health, attack, and defense attributes
     def __init__(self, name, health, attack, defense):
-        self.name = name
-        self.health = health
-        self.attack = attack
-        self.defense = defense
+        self.name = name                 # Name of the enemy
+        self.health = health             # Current health of the enemy
+        self.attack = attack             # Attack power of the enemy
+        self.defense = defense           # Defense power of the enemy
 
+    # Apply damage to the enemy's health
     def take_damage(self, damage):
         self.health -= damage
 
+    # Attack a player by calculating damage dealt and applying it to the player's health
     def attack_player(self, player):
         damage_dealt = self.attack - player.defense
         if damage_dealt > 0:
@@ -16,5 +19,6 @@ class Enemy:
         else:
             print(f"{self.name} atacou {player.name}, mas o ataque não causou dano.")
 
+    # Check if the enemy is still alive based on its health
     def is_alive(self):
         return self.health > 0
